@@ -16,7 +16,6 @@
   "author": "Chingaipe",
   "license": "ISC",
   "dependencies": {
-    "canvas": "^2.11.2",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "onnxruntime-node": "^1.15.1",

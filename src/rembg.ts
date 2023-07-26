@@ -40,10 +40,14 @@ function concatFloat32Array(arrays: Float32Array[]): Float32Array {
 const exists = async (path: string) =>
 	(await fs.stat(path).catch(() => {})) != null;
 
+/**
+ * Removal class
+ */
 export class Rembg {
   private modelDownloaded = false;
   private promisesResolvesUntillDownloaded: ((value: unknown) => void)[] = [];
 
+  // the u2net model is a
   private readonly u2netHome = process.env["U2NET_HOME"] ?? path.resolve(os.homedir(), ".u2net");
 
   readonly modelPath = path.resolve(this.u2netHome, "u2net.onnx");
@@ -58,6 +62,9 @@ export class Rembg {
     this.ensureModelDownloaded();
   }
 
+  /**
+   * Ensures download of the u2net model
+   */
   private async ensureModelDownloaded() {
     if (await exists(this.modelPath)) {
       this.log("U2 model found");
@@ -83,6 +90,12 @@ export class Rembg {
     }
   }
 
+  /**
+   * Converts buffer image to float32Array
+   * @param buffer buffer of image
+   * @param imageSize 
+   * @returns 
+   */
   private toFloat32Array(buffer: Buffer, imageSize: number) {
     const max = getMax(buffer);
     const mean = [0.485, 0.456, 0.406];
